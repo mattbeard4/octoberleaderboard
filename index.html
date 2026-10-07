@@ -318,7 +318,7 @@ footer{margin-top:72px;padding:22px 0 40px;border-top:1px solid var(--line);font
     <svg id="street" role="img" aria-labelledby="streetCap"></svg>
   </div>
 </section>
-<p class="street-cap" id="streetCap">Every lit window is a deal closed.</p>
+<p class="street-cap" id="streetCap">Every lit window is a contract signed.</p>
 
 <main class="wrap">
 
@@ -623,7 +623,7 @@ function paintHero(){
     '<li><b>' + n(days) + '</b>' + plural(days, 'day', 'days') + ' logged</li>' +
     '<li><b>' + n(t.tier_1s) + '</b>tier 1s</li>';
 
-  lightStreet(t.deals_assigned);
+  lightStreet(t.contracts_signed);
 }
 
 function countUp(el, target){
@@ -637,7 +637,7 @@ function countUp(el, target){
   requestAnimationFrame(step);
 }
 
-/* ── the street: one window lights up for every deal closed ── */
+/* ── the street: one window lights up for every contract signed ── */
 var street = { width:0, windows:0, order:[] };
 
 function buildStreet(){
@@ -733,10 +733,10 @@ function lightStreet(deals, waiting){
     // First load only: the windows come on one after another.
     panes[p].style.transitionDelay = (isLit && !loadedOnce && !calm) ? (0.5 + on[p] * 0.11).toFixed(2) + 's' : '0s';
   }
-  if (waiting) { $('streetCap').textContent = 'Every lit window is a deal closed.'; return; }
+  if (waiting) { $('streetCap').textContent = 'Every lit window is a contract signed.'; return; }
   $('streetCap').innerHTML = deals > 0
-    ? '<b>' + n(deals) + '</b> ' + plural(deals, 'window lit', 'windows lit') + ' — one for every deal closed this month.'
-    : 'Every window is dark. The first closed deal lights one up.';
+    ? '<b>' + n(deals) + '</b> ' + plural(deals, 'window lit', 'windows lit') + ' — one for every contract signed.'
+    : 'Every window is dark. The first signed contract lights one up.';
 }
 
 function buildSky(){
@@ -968,7 +968,7 @@ $('meBox').addEventListener('click', function(e){
 var resizeTimer;
 window.addEventListener('resize', function(){
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function(){ lightStreet(totals(shown).deals_assigned || 0, !loadedOnce); }, 200);
+  resizeTimer = setTimeout(function(){ lightStreet(totals(shown).contracts_signed || 0, !loadedOnce); }, 200);
 });
 
 buildSky();
